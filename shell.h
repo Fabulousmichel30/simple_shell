@@ -1,15 +1,15 @@
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
 #include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
-#include <limits.h>
+#include <stdlib.h>
 #include <fcntl.h>
+#include <unistd.h>
+#include <limits.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <string.h>
 #include <errno.h>
 
 /* for read/write buffers */
@@ -30,8 +30,6 @@
 /* 1 if using system getline() */
 #define USE_GETLINE 0
 #define USE_STRTOK 0
-
-#define HIST_FILE	".simple_shell_history"
 #define HIST_MAX	4096
 
 extern char **environ;
