@@ -49,15 +49,17 @@ char *_getenv(info_t *info, const char *name)
 	while (node)
 	{
 		char *p = starts_with(node->str, name);
+
 		if (p && *p)
 			return (p);
+
 		node = node->next;
 	}
 	return (NULL);
 }
 
 /**
- * _mysetenv - Initializes a new environment variable or modifies an existing one
+ * _mysetenv - Initializes new environment variable or modifies an existing one
  * @info: Structure containing potential arguments. Used to maintain
  *         constant function prototype.
  *
