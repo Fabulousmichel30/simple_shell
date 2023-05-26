@@ -2,6 +2,7 @@
 #define _SHELL_H_
 
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -38,6 +39,7 @@ extern char **environ;
 /**
  * struct liststr - singly linked-list
  * @num: number field
+ *
  * @str: a string
  * @next:which points to the next node
  */
