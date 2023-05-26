@@ -61,7 +61,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 		}
 	}
 
-	return r;
+	return (r);
 }
 
 /**
@@ -75,13 +75,14 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 ssize_t read_buf(info_t *info, char *buf, size_t *i)
 {
 	if (*i != 0)
-		return 0;
+		return (0);
 
 	ssize_t r = read(info->readfd, buf, READ_BUF_SIZE);
+
 	if (r >= 0)
 		*i = r;
 
-	return r;
+	return (r);
 }
 
 /**
@@ -95,7 +96,7 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
 int _getline(info_t *info, char **ptr, size_t *length)
 {
 	static char buf[READ_BUF_SIZE];
-	static size_t i = 0, len = 0;
+	static size_t i, len;
 	ssize_t r = 0;
 	char *p = *ptr;
 	size_t s = p && length ? *length : 0;
@@ -107,12 +108,12 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	{
 		if (p)
 			free(p);
-		return -1;
+		return (-1);
 	}
 
 	r = read_buf(info, buf, &len);
 	if (r == -1 || (r == 0 && len == 0))
-		return -1;
+		return (-1);
 
 	if (s)
 		_strncat(new_p, buf + i, k - i);
@@ -127,7 +128,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 		*length = s;
 
 	*ptr = p;
-	return s;
+	return (s);
 }
 
 /**
@@ -138,15 +139,15 @@ int _getline(info_t *info, char **ptr, size_t *length)
  */
 ssize_t get_input(info_t *info)
 {
-	static char *buf = NULL; /* The ';' command chain buffer */
-	static size_t i = 0, j = 0, len = 0;
+	static char *buf; /* The ';' command chain buffer */
+	static size_t i, j, len;
 	ssize_t r = 0;
 	char **buf_p = &(info->arg), *p;
 
 	_putchar(BUF_FLUSH);
 	r = input_buf(info, &buf, &len);
 	if (r == -1) /* EOF */
-		return -1;
+		return (-1);
 
 	/* We have commands left in the chain buffer */
 	if (len)
@@ -170,10 +171,10 @@ ssize_t get_input(info_t *info)
 		}
 
 		*buf_p = p; /* Pass back pointer to current command position */
-		return _strlen(p); /* Return length of current command */
+		return (_strlen(p)); /* Return length of current command */
 	}
 
 	*buf_p = buf; /* Not a chain, pass back buffer from _getline() */
-	return r; /* Return length of buffer from _getline() */
+	return (r); /* Return length of buffer from _getline() */
 }
 

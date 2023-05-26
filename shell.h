@@ -2,64 +2,71 @@
 #define _SHELL_H_
 
 #include <sys/types.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <limits.h>
-#include <sys/stat.h>
 #include <stdio.h>
-#include <sys/stat.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <limits.h>
+#include <fcntl.h>
 #include <errno.h>
 
-/* for read/write buffers */
+/* Read/Write buffer sizes */
 #define READ_BUF_SIZE 1024
 #define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH -1
 
-/* for command chaining */
-#define CMD_NORM	0
-#define CMD_OR		1
-#define CMD_AND		2
-#define CMD_CHAIN	3
+/* Command chaining types */
+#define CMD_NORM    0
+#define CMD_OR      1
+#define CMD_AND     2
+#define CMD_CHAIN   3
 
-/* for convert_number() */
-#define CONVERT_LOWERCASE	1
-#define CONVERT_UNSIGNED	2
+/* Conversion flags for convert_number() */
+#define CONVERT_LOWERCASE   1
+#define CONVERT_UNSIGNED    2
 
-/* 1 if using system getline() */
+/* Flag indicating whether to use system getline() */
 #define USE_GETLINE 0
-#define USE_STRTOK 0
-#define HIST_MAX	4096
+#define USE_STRTOK  0
+
+#define HIST_FILE   ".simple_shell_history"
+#define HIST_MAX    4096
 
 extern char **environ;
 
 
 /**
+<<<<<<< HEAD
  * struct liststr - singly linked-list
  * @num: number field
  *
+=======
+ * struct liststr - Singly linked list
+ * @num: the number field
+>>>>>>> 5c440c4a69ede94db204b0a29a40c31e2cedc609
  * @str: a string
- * @next:which points to the next node
+ * @next: points to the next node
  */
 typedef struct liststr
 {
-	int num;
-	char *str;
-	struct liststr *next;
+    int num;
+    char *str;
+    struct liststr *next;
 } list_t;
 
 /**
- * struct passinfo - contains pseudo-arguements that'll be fed into a function
- * allow a uniform prototype for function pointer structure
- * @arg: a string generated from getline containing arguements
- * @argv:an array of strings generated from arg
+ * struct passinfo - Contains pseudo-arguments to pass into a function,
+ * allowing a uniform prototype for a function pointer struct
+ * @arg: a string generated from getline containing arguments
+ * @argv: an array of strings generated from arg
  * @path: a string path for the current command
  * @argc: the argument count
  * @line_count: the error count
  * @err_num: the error code for exit()s
- * @linecount_flag: if on count this line of input
+ * @linecount_flag: if on, count this line of input
  * @fname: the program filename
  * @env: linked list local copy of environ
  * @environ: custom modified copy of environ from LL env
@@ -74,40 +81,40 @@ typedef struct liststr
  */
 typedef struct passinfo
 {
-	char *arg;
-	char **argv;
-	char *path;
-	int argc;
-	unsigned int line_count;
-	int err_num;
-	int linecount_flag;
-	char *fname;
-	list_t *env;
-	list_t *history;
-	list_t *alias;
-	char **environ;
-	int env_changed;
-	int status;
+    char *arg;
+    char **argv;
+    char *path;
+    int argc;
+    unsigned int line_count;
+    int err_num;
+    int linecount_flag;
+    char *fname;
+    list_t *env;
+    list_t *history;
+    list_t *alias;
+    char **environ;
+    int env_changed;
+    int status;
 
-	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
-	int cmd_buf_type; /* CMD_type ||, &&, ; */
-	int readfd;
-	int histcount;
+    char **cmd_buf; /* Pointer to cmd ; chain buffer, for memory management */
+    int cmd_buf_type; /* CMD_type ||, &&, ; */
+    int readfd;
+    int histcount;
 } info_t;
 
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-		0, 0, 0}
+    0, 0, 0}
 
 /**
- * struct builtin - contains a builtin string and related function
+ * struct builtin - Contains a builtin string and the related function
  * @type: the builtin command flag
  * @func: the function
  */
 typedef struct builtin
 {
-	char *type;
-	int (*func)(info_t *);
+    char *type;
+    int (*func)(info_t *);
 } builtin_table;
 
 
@@ -126,16 +133,16 @@ char *find_path(info_t *, char *, char *);
 int loophsh(char **);
 
 /* toem_errors.c */
-void _eputs(char *);
-int _eputchar(char);
 int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
+int _putsfd(char *str, int fd);
+void _eputs(char *);
 
 /* toem_string.c */
-int _strlen(char *);
-int _strcmp(char *, char *);
 char *starts_with(const char *, const char *);
 char *_strcat(char *, char *);
+int _strlen(char *);
+int _strcmp(char *, char *);
 
 /* toem_string1.c */
 char *_strcpy(char *, char *);
@@ -182,7 +189,7 @@ int _myhelp(info_t *);
 int _myhistory(info_t *);
 int _myalias(info_t *);
 
-/*toem_getline.c */
+/* toem_getline.c */
 ssize_t get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
@@ -233,3 +240,4 @@ int replace_vars(info_t *);
 int replace_string(char **, char *);
 
 #endif
+
