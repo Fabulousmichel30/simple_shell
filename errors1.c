@@ -29,7 +29,7 @@ int _erratoi(char *s)
 }
 
 /**
- * error - prints an error message
+ * print_error - prints an error message
  * @info: parameter & return info struct
  * @estr: string containing specified error type
  * Return: 0 if no numbers in string, converted number otherwise
@@ -48,8 +48,8 @@ void print_error(info_t *info, char *estr)
 
 /**
  * print_d - function prints a decimal (int) no (base 10)
- * input
- * @fd: the filedescriptor to write 
+ * @input: input
+ * @fd: the filedescriptor to write
  * Return: no of char
  */
 int print_d(int input, int fd)
@@ -85,7 +85,7 @@ int print_d(int input, int fd)
 }
 
 /**
- * number_converter - converter funct, a replica of itoa
+ * convert_number - converter funct, a replica of itoa
  * @num: no
  * @base: base
  * @flags: argument flags
