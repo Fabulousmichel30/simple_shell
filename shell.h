@@ -38,14 +38,8 @@ extern char **environ;
 
 
 /**
-  <<<<<<< HEAD
- * struct liststr - singly linked-list
- * @num: number field
- *
- =======
- * struct liststr - Singly linked list
- * @num: the number field
- >>>>>>> 5c440c4a69ede94db204b0a29a40c31e2cedc609
+ * struct liststr - Singly linkd lists
+ * @num: no field
  * @str: a string
  * @next: points to the next node
  */
