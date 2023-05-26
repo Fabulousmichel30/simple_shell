@@ -1,7 +1,6 @@
 #ifndef _SHELL_H_
 #define _SHELL_H_
 
-#include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -30,7 +29,7 @@
 
 /* Flag indicating whether to use system getline() */
 #define USE_GETLINE 0
-#define USE_STRTOK  0
+#define USE_STRTOK 0
 
 #define HIST_FILE   ".simple_shell_history"
 #define HIST_MAX    4096
@@ -135,7 +134,7 @@ int loophsh(char **);
 /* toem_errors.c */
 int _putfd(char c, int fd);
 int _putsfd(char *str, int fd);
-int _putsfd(char *str, int fd);
+int _eputchar(char);
 void _eputs(char *);
 
 /* toem_string.c */
@@ -240,4 +239,3 @@ int replace_vars(info_t *);
 int replace_string(char **, char *);
 
 #endif
-
